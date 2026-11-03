@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f6f8" />
+  <title>Permuta — Painel de parcerias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#inicio"><span class="brand-mark">p</span><span>permuta<span class="brand-dot">.</span></span></a>
+      <div class="workspace-label">ESPAÇO DE TRABALHO</div>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a class="nav-link active" href="#inicio" data-view="inicio"><span class="nav-icon">⌂</span> Visão geral</a>
+        <a class="nav-link" href="#parcerias" data-view="parcerias"><span class="nav-icon">◫</span> Parcerias <span class="nav-count" id="navCount">0</span></a>
+        <a class="nav-link" href="#agenda" data-view="agenda"><span class="nav-icon">▦</span> Agenda</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><div class="help-icon">✦</div><strong>Um passo de cada vez</strong><p>Organize suas parcerias e acompanhe o que vem pela frente.</p></div>
+        <div class="profile"><div class="avatar">GP</div><div><strong>Gestão de parcerias</strong><small>Equipe</small></div><span class="profile-more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><button class="mobile-menu" id="menuButton" aria-label="Abrir menu">☰</button><div class="crumb">Espaço de trabalho <span>/</span> <strong id="crumbCurrent">Visão geral</strong></div><div class="topbar-right"><span class="today" id="todayLabel"></span><div class="avatar avatar-small">GP</div></div></header>
+      <section class="content" id="view-inicio">
+        <div class="welcome-row"><div><div class="eyebrow">TERÇA-FEIRA, 3 DE NOVEMBRO</div><h1>Bom dia, equipe <span>✦</span></h1><p class="subtitle">Aqui está o que merece sua atenção hoje.</p></div><button class="button button-primary" id="newPartnership"><span>＋</span> Nova parceria</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Parcerias ativas</span><span class="stat-icon lavender">◫</span></div><div class="stat-value" id="activeTotal">0</div><div class="stat-foot"><span class="tiny-dot green-dot"></span> No seu acompanhamento</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Eventos próximos</span><span class="stat-icon peach">▦</span></div><div class="stat-value" id="eventTotal">0</div><div class="stat-foot">Nos próximos 30 dias</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Ações pendentes</span><span class="stat-icon blue">↗</span></div><div class="stat-value" id="actionTotal">0</div><div class="stat-foot">Contatos e materiais</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Em avaliação</span><span class="stat-icon yellow">✳</span></div><div class="stat-value" id="reviewTotal">0</div><div class="stat-foot">Parcerias para acompanhar</div></article>
+        </div>
+        <div class="section-heading"><div><h2>Próximos eventos</h2><p>Não deixe passar uma data importante.</p></div><a href="#agenda" class="text-link" data-view="agenda">Ver agenda <span>→</span></a></div>
+        <div class="event-panel" id="upcomingEvents"></div>
+        <div class="lower-grid">
+          <section class="panel"><div class="panel-heading"><div><h2>Ações para acompanhar</h2><p>O que precisa de atenção em breve.</p></div><span class="panel-dots">•••</span></div><div id="actionList" class="action-list"></div></section>
+          <section class="panel partner-panel"><div class="panel-heading"><div><h2>Parcerias recentes</h2><p>Um resumo do que está na sua base.</p></div><a href="#parcerias" class="text-link" data-view="parcerias">Ver todas →</a></div><div id="recentList" class="recent-list"></div></section>
+        </div>
+        <footer class="footer-note">Feito para deixar sua rotina de parcerias mais leve <span>♥</span></footer>
+      </section>
+      <section class="content secondary-view hidden" id="view-parcerias">
+        <div class="page-heading"><div><div class="eyebrow">SUA BASE</div><h1>Parcerias</h1><p class="subtitle">Tudo o que vocês oferecem, recebem e acompanham.</p></div><button class="button button-primary" id="newPartnership2">＋ Nova parceria</button></div>
+        <div class="toolbar"><div class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar parceria..." /></div><select id="typeFilter" aria-label="Filtrar por tipo"><option value="todos">Todos os tipos</option><option value="Publicidade">Publicidade</option><option value="Torre">Torre</option><option value="Outro">Outro</option></select></div>
+        <div class="table-wrap"><table><thead><tr><th>PARCERIA</th><th>TIPO</th><th>O QUE RECEBEMOS</th><th>AVALIAÇÃO</th><th>PRÓXIMO EVENTO</th><th></th></tr></thead><tbody id="partnerRows"></tbody></table><div id="emptyPartners" class="empty-state hidden"><div class="empty-illustration">◫</div><h3>Sua base começa aqui</h3><p>Cadastre a primeira parceria para acompanhar tudo em um só lugar.</p><button class="button button-primary" id="emptyNew">＋ Cadastrar parceria</button></div></div>
+      </section>
+      <section class="content secondary-view hidden" id="view-agenda">
+        <div class="page-heading"><div><div class="eyebrow">PLANEJAMENTO</div><h1>Agenda</h1><p class="subtitle">Eventos e datas que pedem preparação.</p></div><button class="button button-primary" id="newEvent">＋ Novo evento</button></div>
+        <div class="agenda-summary"><div class="agenda-month-icon">▦</div><div><strong>Seus próximos compromissos</strong><p>Veja datas, parceiros e o que precisa ser feito antes.</p></div></div>
+        <div class="agenda-list" id="agendaList"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="partnershipDialog" class="modal"><form id="partnershipForm" method="dialog"><div class="modal-head"><div><div class="eyebrow">NOVA NA SUA BASE</div><h2>Cadastrar parceria</h2></div><button type="button" class="icon-button" data-close="partnershipDialog">×</button></div><div class="form-grid"><label class="field span-2">Nome da parceria<input name="name" required placeholder="Ex.: Festa do Sol, Torre Centro..." /></label><label class="field">Tipo<select name="type"><option>Publicidade</option><option>Torre</option><option>Outro</option></select></label><label class="field">Status<select name="status"><option>Ativa</option><option>Em avaliação</option><option>Inativa</option></select></label><label class="field span-2">O que oferecemos<textarea name="offer" rows="2" placeholder="Ex.: internet, divulgação nas redes..."></textarea></label><label class="field span-2">O que recebemos<textarea name="benefit" rows="2" placeholder="Ex.: divulgação, ingressos, serviço..."></textarea></label><label class="field">Site ou rede social<input name="url" type="url" placeholder="https://" /></label><label class="field">Contato<input name="contact" placeholder="Nome, telefone ou e-mail" /></label><label class="field span-2">Observações e avaliação<textarea name="notes" rows="3" placeholder="Como está sendo a parceria? Vale a pena? Registre aqui e atualize com o tempo."></textarea></label></div><div class="modal-actions"><button type="button" class="button button-quiet" data-close="partnershipDialog">Cancelar</button><button class="button button-primary" type="submit">Salvar parceria</button></div></form></dialog>
+  <dialog id="eventDialog" class="modal"><form id="eventForm" method="dialog"><div class="modal-head"><div><div class="eyebrow">NA AGENDA</div><h2>Novo evento</h2></div><button type="button" class="icon-button" data-close="eventDialog">×</button></div><div class="form-grid"><label class="field span-2">Nome do evento<input name="name" required placeholder="Ex.: Festa de aniversário da cidade" /></label><label class="field">Data<input name="date" type="date" required /></label><label class="field">Parceria<select name="partnership" id="eventPartner"></select></label><label class="field">Entrar em contato<input name="contactDate" type="date" /></label><label class="field">Enviar materiais até<input name="materialsDate" type="date" /></label><label class="field span-2">O que precisa ser feito?<textarea name="task" rows="2" placeholder="Ex.: enviar logo, fotos e texto para divulgação"></textarea></label></div><div class="modal-actions"><button type="button" class="button button-quiet" data-close="eventDialog">Cancelar</button><button class="button button-primary" type="submit">Salvar evento</button></div></form></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
